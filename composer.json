@@ -1,5 +1,5 @@
 {
-    "name": "aidar555/hangman", 
+    "name": "aidar555/hangman",
     "authors": [
         {
             "name": "Aidar Yunusov",
@@ -7,7 +7,8 @@
         }
     ],
     "require": {
-        "wp-cli/php-cli-tools": "^0.12.6"
+        "wp-cli/php-cli-tools": "^0.12.6",
+        "gabordemooij/redbean": "^5.7"
     },
     "bin": [
         "bin/hangman"

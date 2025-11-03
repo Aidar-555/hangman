@@ -26,9 +26,10 @@ function startGame(): void
 
     switch ($opts['mode']) {
         case 'list':
-            $db = new Database();
-            $games = (new GameRepository($db->getConnection()))->listGames();
+            $db = new \aidar555\hangman\Model\Database(); // инициализация RedBean
+            $gameRepo = new \aidar555\hangman\Repository\GameRepository();
 
+            $games = $gameRepo->listGames();
             foreach ($games as $g) {
                 echo "{$g['id']}) {$g['date']} | {$g['player_name']} | {$g['word']} | {$g['result']}\n";
             }
@@ -40,10 +41,9 @@ function startGame(): void
                 return;
             }
 
-            $db = new Database();
-            $pdo = $db->getConnection();
-            $gameRepo = new GameRepository($pdo);
-            $attemptRepo = new AttemptRepository($pdo);
+            $db = new \aidar555\hangman\Model\Database(); // инициализация RedBean
+            $gameRepo = new \aidar555\hangman\Repository\GameRepository();
+            $attemptRepo = new \aidar555\hangman\Repository\AttemptRepository();
 
             $game = $gameRepo->getGameById($opts['replay_id']);
             if (!$game) {
@@ -134,9 +134,8 @@ function runNewGame(array $opts): void
     $game = new Game($word);
 
     $db = new Database();
-    $pdo = $db->getConnection();
-    $gameRepo = new GameRepository($pdo);
-    $attemptRepo = new AttemptRepository($pdo);
+    $gameRepo = new GameRepository();
+    $attemptRepo = new AttemptRepository();
 
     $gameId = $gameRepo->createGame($player, $word);
 
