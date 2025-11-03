@@ -7,7 +7,8 @@
         }
     ],
     "require": {
-        "wp-cli/php-cli-tools": "^0.12.6"
+        "wp-cli/php-cli-tools": "^0.12.6",
+        "gabordemooij/redbean": "^5.7"
     },
     "bin": [
         "bin/hangman"
@@ -20,7 +21,14 @@
             "src/Controller.php",
             "src/View.php",
             "src/Model/Game.php",
+<<<<<<< HEAD
+            "src/Model/Dictionary.php",
+            "src/Model/Database.php",
+            "src/Repository/GameRepository.php",
+            "src/Repository/AttemptRepository.php"
+=======
             "src/Model/Dictionary.php"
+>>>>>>> 671cd885c9c1e45054488e651978bbc09c65ffaf
         ]
     }
 }

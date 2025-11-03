@@ -1,10 +1,20 @@
 <?php
+<<<<<<< HEAD
+
+namespace aidar555\hangman\Controller;
+
+use aidar555\hangman\Model\{Game, Dictionary, Database};
+use aidar555\hangman\Repository\{GameRepository, AttemptRepository};
+
+use function aidar555\hangman\View\{
+=======
 
 namespace Aidar555\hangman\Controller;
 
 use Aidar555\hangman\Model\{Game, Dictionary};
 
 use function Aidar555\hangman\View\{
+>>>>>>> 671cd885c9c1e45054488e651978bbc09c65ffaf
     showHelp,
     showStartScreen,
     showMaskedWord,
@@ -25,14 +35,45 @@ function startGame(): void
 
     switch ($opts['mode']) {
         case 'list':
+<<<<<<< HEAD
+            $db = new \aidar555\hangman\Model\Database(); // инициализация RedBean
+            $gameRepo = new \aidar555\hangman\Repository\GameRepository();
+
+            $games = $gameRepo->listGames();
+            foreach ($games as $g) {
+                echo "{$g['id']}) {$g['date']} | {$g['player_name']} | {$g['word']} | {$g['result']}\n";
+            }
+=======
             showMessage('Listing saved games is not implemented (DB not connected).');
+>>>>>>> 671cd885c9c1e45054488e651978bbc09c65ffaf
             return;
 
         case 'replay':
             if ($opts['replay_id'] === null) {
                 showMessage('Replay mode requires id: --replay <id>');
+<<<<<<< HEAD
+                return;
+            }
+
+            $db = new \aidar555\hangman\Model\Database(); // инициализация RedBean
+            $gameRepo = new \aidar555\hangman\Repository\GameRepository();
+            $attemptRepo = new \aidar555\hangman\Repository\AttemptRepository();
+
+            $game = $gameRepo->getGameById($opts['replay_id']);
+            if (!$game) {
+                showMessage("Game id {$opts['replay_id']} not found.");
+                return;
+            }
+
+            showMessage("Replay: {$game['player_name']} vs word '{$game['word']}' ({$game['result']})");
+
+            $attempts = $attemptRepo->getAttempts($opts['replay_id']);
+            foreach ($attempts as $a) {
+                echo "Attempt {$a['attempt_number']}: '{$a['letter']}' — {$a['outcome']}\n";
+=======
             } else {
                 showMessage("Replay of game id {$opts['replay_id']} is not implemented (DB missing).");
+>>>>>>> 671cd885c9c1e45054488e651978bbc09c65ffaf
             }
             return;
 
@@ -110,6 +151,15 @@ function runNewGame(array $opts): void
 
     $game = new Game($word);
 
+<<<<<<< HEAD
+    $db = new Database();
+    $gameRepo = new GameRepository();
+    $attemptRepo = new AttemptRepository();
+
+    $gameId = $gameRepo->createGame($player, $word);
+
+=======
+>>>>>>> 671cd885c9c1e45054488e651978bbc09c65ffaf
     showStartScreen($player);
 
     $attempts = 0;
@@ -132,11 +182,24 @@ function runNewGame(array $opts): void
         } else {
             showMessage("Already tried '{$letter}'");
         }
+<<<<<<< HEAD
+
+        $outcome = $result === 'ok' ? 'correct' :
+            ($result === 'miss' ? 'wrong' : 'repeat');
+        $attemptRepo->addAttempt($gameId, $attempts, $letter, $outcome);
+=======
+>>>>>>> 671cd885c9c1e45054488e651978bbc09c65ffaf
     }
 
     $won = $game->isWon();
     showHangman($game->getWrongCount());
     showMaskedWord($game->getMaskedWord());
     showResult($won, $game->getWord());
+<<<<<<< HEAD
+
+    $gameRepo->updateResult($gameId, $won ? 'won' : 'lost');
+    showMessage('Game saved to database.');
+=======
     showMessage('Note: results are not saved — DB not implemented yet.');
+>>>>>>> 671cd885c9c1e45054488e651978bbc09c65ffaf
 }

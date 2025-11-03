@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
+namespace aidar555\hangman\Model;
+=======
 namespace Aidar555\hangman\Model;
+>>>>>>> 671cd885c9c1e45054488e651978bbc09c65ffaf
 
 class Game
 {

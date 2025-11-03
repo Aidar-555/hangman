@@ -1,7 +1,13 @@
 <?php
+<<<<<<< HEAD
+
+namespace aidar555\hangman\View;
+
+=======
 
 namespace Aidar555\hangman\View;
 
+>>>>>>> 671cd885c9c1e45054488e651978bbc09c65ffaf
 use cli;
 
 function showHelp(): void
